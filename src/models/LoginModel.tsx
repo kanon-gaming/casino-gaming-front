@@ -1,4 +1,5 @@
 export type LoginModel = {
-  email: String;
-  password: String;
+  email: string;
+  password: string;
+  isValid: boolean;
 };
