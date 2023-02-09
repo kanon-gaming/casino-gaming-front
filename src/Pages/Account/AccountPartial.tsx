@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 
 import { Tab, Tabs } from "react-bootstrap";
 import { LoginPartial } from "./Login/LoginPartial";
+import { RegisterPartial } from "./Register/RegisterPartial";
 
 export function AccountPartial() {
 
@@ -23,7 +24,9 @@ export function AccountPartial() {
           <Tab eventKey="login" title="Sign in">
             <LoginPartial />
           </Tab>
-          <Tab eventKey="register" title="New Account"></Tab>
+          <Tab eventKey="register" title="New Account">
+            <RegisterPartial />
+          </Tab>
         </Tabs>
       </Modal.Body>
     </Modal>

@@ -52,6 +52,9 @@ export const LoginPartial = observer(() => {
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
+          onChange={(e) =>
+            (accountStore.loginModel.password = e.currentTarget.value)
+          }
           placeholder="Password"
           aria-label="Password"
           aria-describedby="password"
