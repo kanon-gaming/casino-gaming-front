@@ -1,4 +1,5 @@
 import { observer } from "mobx-react";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
 import { Button, Form, InputGroup } from "react-bootstrap";
@@ -6,6 +7,7 @@ import { useAccountStore } from "../../../Stores/AccountStore";
 
 export const LoginPartial = observer(() => {
   const accountStore = useAccountStore();
+  const navigate = useNavigate();
 
   const onSubmit = (event: any) => {
     event.preventDefault();
@@ -16,6 +18,7 @@ export const LoginPartial = observer(() => {
       accountStore.loginModel.isValid = true;
     } else {
       accountStore.loginModel.isValid = false;
+      navigate('/Games');
     }
   };
 
