@@ -3,7 +3,7 @@
   max-height: 100vh;
   min-height: 100vh;
   width: 100%;
-  background-color: black;
+  /* background-color: #242424; */
 }
 
 .Header {
@@ -11,7 +11,6 @@
   height: 100px;
   width: 100%;
   justify-content: space-between;
-  background-color: black;
 }
 
 .Header > img {
@@ -32,7 +31,7 @@
 .GamesArea {
   display: grid;
   grid-template-columns: auto auto auto auto auto;
-  margin-top: 50px;
+  margin-top: 30px;
   max-height: calc(100vh - 190px);
   height: 100vh;
   overflow-y: scroll;
@@ -55,6 +54,46 @@
   padding: 7px;
 }
 
-.GamesArea > div > img, .GamesArea > div > a > img {
+.GamesArea > div > img,
+.GamesArea > div > a > img {
   object-fit: cover;
+}
+
+.GameDisabled {
+  filter: brightness(0.4);
+}
+
+.GameEnabled > a > img {
+  transition: transform 0.4s;
+}
+
+.GameEnabled > a > img:hover {
+  transform: scale(1.1);
+}
+
+.SearchInput {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  display: grid;
+}
+
+.SearchInput > div {
+  width: 19%;
+  position: relative;
+  left: 81%;
+}
+
+.SearchInput > div > input {
+  height: 31px;
+  border: 1px solid #2e2e2e;
+  background-color: #000;
+  color: #878787;
+}
+
+.SearchInput > div > input:focus {
+  background-color: #2e2e2e;
+  border: none;
+  color: #c7c7c7;
+  box-shadow: 0 0 0 4px rgb(33 35 38 / 25%);
 }

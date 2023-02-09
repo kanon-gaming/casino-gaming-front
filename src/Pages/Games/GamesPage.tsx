@@ -1,16 +1,20 @@
 import { gamesStore, GamesStoreProvider } from "../../Stores/GamesStore";
 
-import logo from "../../assets/img/logo.webp";
 import "../../assets/css/Games.css";
 import { GamesPartial } from "./List/GamesPartial";
+
+import BackGroundImg from "../../assets/img/games.webp";
 
 export function GamesPage() {
   return (
     <GamesStoreProvider value={gamesStore}>
-      <div className="App">
-        <div className="Header">
-          <img src={logo} alt="Logo"/>
-        </div>
+      <div
+        className="App"
+        style={{
+          backgroundImage: `url(${BackGroundImg})`,
+          backgroundSize: "cover"
+        }}
+      >
         <GamesPartial />
       </div>
     </GamesStoreProvider>

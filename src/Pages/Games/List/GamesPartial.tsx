@@ -3,6 +3,7 @@ import { useGamesStore } from "../../../Stores/GamesStore";
 import data from "../../../Infrastructure/Data/game-data.json";
 import { observer } from "mobx-react";
 import { Form } from "react-bootstrap";
+import logo from "../../../assets/img/logo.webp";
 
 export const GamesPartial = observer(() => {
   const gameStore = useGamesStore();
@@ -30,50 +31,55 @@ export const GamesPartial = observer(() => {
           return game;
         });
     } else {
-      if (gameStore.gamesModel.length === 0) {
-        gameStore.gamesModel = [];
-        data.map((game) => {
-          gameStore.gamesModel.push({
-            id: game.id,
-            providerName: game.providerName,
-            slug: game.slug,
-            startUrl: game.startUrl ?? "",
-            thumb: {
-              url: game.thumb?.url ?? "",
-            },
-            title: game.title,
-          });
-          return game;
+      gameStore.gamesModel = [];
+      data.map((game) => {
+        gameStore.gamesModel.push({
+          id: game.id,
+          providerName: game.providerName,
+          slug: game.slug,
+          startUrl: game.startUrl ?? "",
+          thumb: {
+            url: game.thumb?.url ?? "",
+          },
+          title: game.title,
         });
-      }
+        return game;
+      });
     }
-  }, [gameStore.gamesModel, gameStore.search]);
+  }, [gameStore, gameStore.search]);
 
   return (
-    <div className="GamesContainer">
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          onChange={(e) => (gameStore.search = e.currentTarget.value)}
-          type="email"
-          placeholder="Enter email"
-        />
-      </Form.Group>
-
-      <div className="GamesArea">
-        {gameStore.gamesModel.map((item) => {
-          return (
-            <div key={item.id}>
-              {item.startUrl != null && item.startUrl !== "" ? (
-                <a rel="noreferrer" target="_blank" href={item.startUrl}>
-                  <img alt={item.title} src={item.thumb?.url} />
-                </a>
-              ) : (
-                <img alt={item.title} src={item.thumb?.url} />
-              )}
-            </div>
-          );
-        })}
+    <div>
+      <div className="Header">
+        <img src={logo} alt="Logo" />
+      </div>
+      <div className="GamesContainer">
+        <div>
+          <div className="SearchInput">
+            <Form.Group controlId="formBasicEmail">
+              <Form.Control
+                onChange={(e) => (gameStore.search = e.currentTarget.value)}
+                type="text"
+                placeholder="Search"
+              />
+            </Form.Group>
+          </div>
+          <div className="GamesArea">
+            {gameStore.gamesModel.map((item) => {
+              return (
+                <div key={item.id} className={item.startUrl != null && item.startUrl !== "" ? "GameEnabled" : "GameDisabled"}>
+                  {item.startUrl != null && item.startUrl !== "" ? (
+                    <a rel="noreferrer" target="_blank" href={item.startUrl}>
+                      <img alt={item.title} src={item.thumb?.url} />
+                    </a>
+                  ) : (
+                    <img alt={item.title} src={item.thumb?.url} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
