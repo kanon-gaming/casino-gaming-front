@@ -1,10 +1,11 @@
 import React from "react";
 
 import { accountStore, AccountStoreProvider } from "../../Stores/AccountStore";
+import { AccountPartial } from "./AccountPartial";
 
 import loginlogo from "../../assets/img/loginpage.webp";
+
 import "../../assets/css/Login.css";
-import { AccountPartial } from "./AccountPartial";
 
 export function AccountPage() {
   return (

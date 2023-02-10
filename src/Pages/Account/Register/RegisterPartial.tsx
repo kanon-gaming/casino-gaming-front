@@ -1,9 +1,10 @@
-import { observer } from "mobx-react";
 import React from "react";
-
+import { observer } from "mobx-react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useAccountStore } from "../../../Stores/AccountStore";
 import { GoEye, GoEyeClosed } from "react-icons/go";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterPartial = observer(() => {
   const accountStore = useAccountStore();
@@ -17,12 +18,26 @@ export const RegisterPartial = observer(() => {
     event.preventDefault();
     event.stopPropagation();
 
-    const form = event.currentTarget;
-
-    if (form.checkValidity() === false) {
+    if (accountStore.isRegisterFormValid()) {
       accountStore.registerModel.isValid = true;
     } else {
       accountStore.registerModel.isValid = false;
+    }
+
+    if (accountStore.registerModel.isValid) {
+      accountStore.doRegister().then(function (result) {
+        accountStore.resultApiModel = result.data;
+        if (!accountStore.resultApiModel.valid) {
+          accountStore.resultApiModel.messages.forEach((element) => {
+            toast.warn(element, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 4000,
+            });
+          });
+        } else {
+          window.location.reload();
+        }
+      });
     }
   };
 
@@ -32,10 +47,12 @@ export const RegisterPartial = observer(() => {
       validated={accountStore.registerModel.isValid}
       onSubmit={onSubmit}
     >
+      <ToastContainer />
       <Form.Group className="mb-3" controlId="name">
         <Form.Label>Name</Form.Label>
         <InputGroup className="mb-3">
           <Form.Control
+            isInvalid={!!accountStore.registerModel.nameMessage}
             type="text"
             placeholder="Enter your name"
             onChange={(e) =>
@@ -46,16 +63,16 @@ export const RegisterPartial = observer(() => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Please provide a valid name.
+            {accountStore.registerModel.nameMessage}
           </Form.Control.Feedback>
         </InputGroup>
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="emailRegister">
         <Form.Label>Email address</Form.Label>
         <InputGroup className="mb-3">
           <InputGroup.Text id="basic-emailRegister">@</InputGroup.Text>
           <Form.Control
+            isInvalid={!!accountStore.registerModel.emailMessage}
             type="email"
             placeholder="Enter email"
             onChange={(e) =>
@@ -66,18 +83,18 @@ export const RegisterPartial = observer(() => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Please provide a valid email.
+            {accountStore.registerModel.emailMessage}
           </Form.Control.Feedback>
         </InputGroup>
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="passwordRegister">
         <Form.Label>Password</Form.Label>
         <InputGroup className="mb-3">
           <Form.Control
+            isInvalid={!!accountStore.registerModel.passwordMessage}
             type={
               accountStore.registerModel.isPasswordVisible ? "text" : "password"
             }
@@ -103,15 +120,18 @@ export const RegisterPartial = observer(() => {
           </Button>
 
           <Form.Control.Feedback type="invalid">
-            Please provide a password.
+            {accountStore.registerModel.passwordMessage}
           </Form.Control.Feedback>
         </InputGroup>
+        <Form.Text className="text-muted">
+          Your password must contain at least 6 characters.
+        </Form.Text>
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="passwordConfirmRegister">
         <Form.Label>Confirm Password</Form.Label>
 
         <Form.Control
+          isInvalid={!!accountStore.registerModel.passwordconfirmMessage}
           type="password"
           onChange={(e) =>
             (accountStore.registerModel.passwordconfirm = e.currentTarget.value)
@@ -122,10 +142,9 @@ export const RegisterPartial = observer(() => {
           required
         />
         <Form.Control.Feedback type="invalid">
-          Please provide a password.
+          {accountStore.registerModel.passwordconfirmMessage}
         </Form.Control.Feedback>
       </Form.Group>
-
       <Button variant="primary" type="submit">
         Submit
       </Button>
