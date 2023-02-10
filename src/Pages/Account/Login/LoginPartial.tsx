@@ -4,6 +4,7 @@ import React from "react";
 
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useAccountStore } from "../../../Stores/AccountStore";
+import { toast } from "react-toastify";
 
 export const LoginPartial = observer(() => {
   const accountStore = useAccountStore();
@@ -13,19 +14,33 @@ export const LoginPartial = observer(() => {
     event.preventDefault();
     event.stopPropagation();
 
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
+    if (accountStore.isLoginFormValid()) {
       accountStore.loginModel.isValid = true;
     } else {
       accountStore.loginModel.isValid = false;
-      navigate('/Games');
+    }
+
+    if (accountStore.loginModel.isValid) {
+      accountStore.doLogin().then(function (result) {
+        accountStore.resultApiRegisterModel = result.data;
+        if (!accountStore.resultApiRegisterModel.valid) {
+          accountStore.resultApiRegisterModel.messages.forEach((element) => {
+            toast.warn(element, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 4000,
+            });
+          });
+        } else {
+          navigate("/Games");
+        }
+      });
     }
   };
 
   return (
     <Form
       noValidate
-      validated={accountStore.loginModel.isValid}
+      validated={accountStore.registerModel.isValid}
       onSubmit={onSubmit}
     >
       <Form.Group className="mb-3" controlId="email">
@@ -34,6 +49,7 @@ export const LoginPartial = observer(() => {
           <InputGroup.Text id="basic-email">@</InputGroup.Text>
           <Form.Control
             type="email"
+            isInvalid={!!accountStore.loginModel.emailMessage}
             placeholder="Enter email"
             onChange={(e) =>
               (accountStore.loginModel.email = e.currentTarget.value)
@@ -43,7 +59,7 @@ export const LoginPartial = observer(() => {
             required
           />
           <Form.Control.Feedback type="invalid">
-            Please provide a valid email.
+            {accountStore.loginModel.emailMessage}
           </Form.Control.Feedback>
         </InputGroup>
         <Form.Text className="text-muted">
@@ -54,6 +70,7 @@ export const LoginPartial = observer(() => {
       <Form.Group className="mb-3" controlId="password">
         <Form.Label>Password</Form.Label>
         <Form.Control
+          isInvalid={!!accountStore.loginModel.passwordMessage}
           type="password"
           onChange={(e) =>
             (accountStore.loginModel.password = e.currentTarget.value)
@@ -64,7 +81,7 @@ export const LoginPartial = observer(() => {
           required
         />
         <Form.Control.Feedback type="invalid">
-          Please provide a password.
+          {accountStore.loginModel.passwordMessage}
         </Form.Control.Feedback>
       </Form.Group>
 

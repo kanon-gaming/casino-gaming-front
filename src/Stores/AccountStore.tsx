@@ -8,7 +8,9 @@ import { ResultApiModel } from "../models/ResultApiModel";
 export class AccountStore {
   loginModel: LoginModel = {
     email: "",
+    emailMessage: "",
     password: "",
+    passwordMessage: "",
     isValid: false,
   };
 
@@ -25,7 +27,7 @@ export class AccountStore {
     isPasswordVisible: false,
   };
 
-  resultApiModel: ResultApiModel = {
+  resultApiRegisterModel: ResultApiModel = {
     valid: true,
     messages: [],
   };
@@ -41,6 +43,49 @@ export class AccountStore {
         confirmpassword: this.registerModel.passwordconfirm,
       },
     });
+  }
+
+  async doLogin() {
+    return await axios({
+      method: "post",
+      url: "http://localhost:2002/login",
+      data: {
+        email: this.registerModel.email,
+        name: this.registerModel.name,
+        password: this.registerModel.password,
+        confirmpassword: this.registerModel.passwordconfirm,
+      },
+    });
+  }
+
+  isLoginFormValid() {
+    if (!accountStore.loginModel.email) {
+      accountStore.loginModel.emailMessage = "Please provide a email.";
+    } else if (
+      accountStore.loginModel.email &&
+      !/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(
+        accountStore.loginModel.email
+      )
+    ) {
+      accountStore.loginModel.emailMessage = "Please provide a valid email.";
+    } else {
+      accountStore.loginModel.emailMessage = "";
+    }
+
+    if (!accountStore.loginModel.password) {
+      accountStore.loginModel.passwordMessage = "Please provide a password.";
+    } else {
+      accountStore.loginModel.passwordMessage = "";
+    }
+
+    if (
+      accountStore.registerModel.emailMessage ||
+      accountStore.registerModel.passwordMessage
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   isRegisterFormValid() {
@@ -118,7 +163,7 @@ export class AccountStore {
       accountStore.registerModel.passwordconfirmMessage
     ) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }

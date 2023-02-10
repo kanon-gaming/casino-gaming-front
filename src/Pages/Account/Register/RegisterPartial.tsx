@@ -4,7 +4,6 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { useAccountStore } from "../../../Stores/AccountStore";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterPartial = observer(() => {
   const accountStore = useAccountStore();
@@ -26,9 +25,9 @@ export const RegisterPartial = observer(() => {
 
     if (accountStore.registerModel.isValid) {
       accountStore.doRegister().then(function (result) {
-        accountStore.resultApiModel = result.data;
-        if (!accountStore.resultApiModel.valid) {
-          accountStore.resultApiModel.messages.forEach((element) => {
+        accountStore.resultApiRegisterModel = result.data;
+        if (!accountStore.resultApiRegisterModel.valid) {
+          accountStore.resultApiRegisterModel.messages.forEach((element) => {
             toast.warn(element, {
               position: toast.POSITION.TOP_CENTER,
               autoClose: 4000,
