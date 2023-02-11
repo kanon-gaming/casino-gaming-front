@@ -8,7 +8,9 @@ import { ResultApiModel } from "../models/ResultApiModel";
 export class AccountStore {
   loginModel: LoginModel = {
     email: "",
+    emailMessage: "",
     password: "",
+    passwordMessage: "",
     isValid: false,
   };
 
@@ -41,6 +43,47 @@ export class AccountStore {
         confirmpassword: this.registerModel.passwordconfirm,
       },
     });
+  }
+
+  async doLogin() {
+    return await axios({
+      method: "post",
+      url: "http://localhost:2002/login",
+      data: {
+        email: this.loginModel.email,
+        password: this.loginModel.password,
+      },
+    });
+  }
+
+  isLoginFormValid() {
+    if (!accountStore.loginModel.email) {
+      accountStore.loginModel.emailMessage = "Please provide a email.";
+    } else if (
+      accountStore.loginModel.email &&
+      !/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(
+        accountStore.loginModel.email
+      )
+    ) {
+      accountStore.loginModel.emailMessage = "Please provide a valid email.";
+    } else {
+      accountStore.loginModel.emailMessage = "";
+    }
+
+    if (!accountStore.loginModel.password) {
+      accountStore.loginModel.passwordMessage = "Please provide a password.";
+    } else {
+      accountStore.loginModel.passwordMessage = "";
+    }
+
+    if (
+      accountStore.registerModel.emailMessage ||
+      accountStore.registerModel.passwordMessage
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   isRegisterFormValid() {
@@ -118,7 +161,7 @@ export class AccountStore {
       accountStore.registerModel.passwordconfirmMessage
     ) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }

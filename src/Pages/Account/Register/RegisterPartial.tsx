@@ -4,7 +4,6 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { useAccountStore } from "../../../Stores/AccountStore";
 import { GoEye, GoEyeClosed } from "react-icons/go";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterPartial = observer(() => {
   const accountStore = useAccountStore();
