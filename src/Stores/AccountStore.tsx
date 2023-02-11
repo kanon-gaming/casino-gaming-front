@@ -27,7 +27,7 @@ export class AccountStore {
     isPasswordVisible: false,
   };
 
-  resultApiRegisterModel: ResultApiModel = {
+  resultApiModel: ResultApiModel = {
     valid: true,
     messages: [],
   };
@@ -50,10 +50,8 @@ export class AccountStore {
       method: "post",
       url: "http://localhost:2002/login",
       data: {
-        email: this.registerModel.email,
-        name: this.registerModel.name,
-        password: this.registerModel.password,
-        confirmpassword: this.registerModel.passwordconfirm,
+        email: this.loginModel.email,
+        password: this.loginModel.password,
       },
     });
   }

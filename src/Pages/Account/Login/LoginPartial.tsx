@@ -4,7 +4,7 @@ import React from "react";
 
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { useAccountStore } from "../../../Stores/AccountStore";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 export const LoginPartial = observer(() => {
   const accountStore = useAccountStore();
@@ -22,15 +22,16 @@ export const LoginPartial = observer(() => {
 
     if (accountStore.loginModel.isValid) {
       accountStore.doLogin().then(function (result) {
-        accountStore.resultApiRegisterModel = result.data;
-        if (!accountStore.resultApiRegisterModel.valid) {
-          accountStore.resultApiRegisterModel.messages.forEach((element) => {
+        accountStore.resultApiModel = result.data;
+        if (!accountStore.resultApiModel.valid) {
+          accountStore.resultApiModel.messages.forEach((element) => {
             toast.warn(element, {
               position: toast.POSITION.TOP_CENTER,
               autoClose: 4000,
             });
           });
         } else {
+          localStorage.setItem('user', result.data.user)
           navigate("/Games");
         }
       });
@@ -43,6 +44,7 @@ export const LoginPartial = observer(() => {
       validated={accountStore.registerModel.isValid}
       onSubmit={onSubmit}
     >
+      <ToastContainer />
       <Form.Group className="mb-3" controlId="email">
         <Form.Label>Email address</Form.Label>
         <InputGroup className="mb-3">

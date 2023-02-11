@@ -25,9 +25,9 @@ export const RegisterPartial = observer(() => {
 
     if (accountStore.registerModel.isValid) {
       accountStore.doRegister().then(function (result) {
-        accountStore.resultApiRegisterModel = result.data;
-        if (!accountStore.resultApiRegisterModel.valid) {
-          accountStore.resultApiRegisterModel.messages.forEach((element) => {
+        accountStore.resultApiModel = result.data;
+        if (!accountStore.resultApiModel.valid) {
+          accountStore.resultApiModel.messages.forEach((element) => {
             toast.warn(element, {
               position: toast.POSITION.TOP_CENTER,
               autoClose: 4000,
