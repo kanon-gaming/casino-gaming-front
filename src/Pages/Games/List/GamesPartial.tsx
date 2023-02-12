@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useGamesStore } from "../../../Stores/GamesStore";
-import data from "../../../Infrastructure/Data/game-data.json";
 import { observer } from "mobx-react";
 import { Form } from "react-bootstrap";
+import data from "../../../Infrastructure/Data/game-data.json";
 import logo from "../../../assets/img/logo.webp";
 
 export const GamesPartial = observer(() => {
@@ -67,7 +67,14 @@ export const GamesPartial = observer(() => {
           <div className="GamesArea">
             {gameStore.gamesModel.map((item) => {
               return (
-                <div key={item.id} className={item.startUrl != null && item.startUrl !== "" ? "GameEnabled" : "GameDisabled"}>
+                <div
+                  key={item.id}
+                  className={
+                    item.startUrl != null && item.startUrl !== ""
+                      ? "GameEnabled"
+                      : "GameDisabled"
+                  }
+                >
                   {item.startUrl != null && item.startUrl !== "" ? (
                     <a rel="noreferrer" target="_blank" href={item.startUrl}>
                       <img alt={item.title} src={item.thumb?.url} />
