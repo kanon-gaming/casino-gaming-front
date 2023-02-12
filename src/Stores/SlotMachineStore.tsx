@@ -1,10 +1,13 @@
 import { makeAutoObservable } from "mobx";
 import { createContext, useContext } from "react";
 import { SlotMachineModel } from "../models/SlotMachineModel";
-import uuid from 'react-native-uuid';
+import uuid from "react-native-uuid";
+import axios from "axios";
+import { ResultRollModel } from "../models/ResultApiModel";
 
 export class SlotMachineStore {
   slotMachineModel: SlotMachineModel = {
+    credits: 1,
     rells: [
       {
         id: uuid.v4().toString(),
@@ -20,8 +23,22 @@ export class SlotMachineStore {
       },
     ],
   };
-
   rolling: boolean = false;
+  gameOver: boolean = false;
+  resultRollModel: ResultRollModel = {
+    winnedCredits: 0,
+    spin: [0, 0, 0],
+  };
+
+  doRoll = async () => {
+    return await axios({
+      method: "post",
+      url: "http://localhost:2002/roll",
+      headers: {
+        Authorization: localStorage.getItem("user"),
+      },
+    });
+  };
 
   constructor() {
     makeAutoObservable(this);

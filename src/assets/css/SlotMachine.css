@@ -1,9 +1,12 @@
 .SlotMachine {
   width: 100%;
   height: 100vh;
+  margin-top: -50px;
+  background-color: rgb(247 247 247);
 }
 
 #slot-machine {
+  top: 10vh;
   border-radius: 10px;
   box-shadow: 0 1px 100px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.8);
   height: 60vh;
@@ -113,6 +116,99 @@
   z-index: 1;
 }
 
+#slot-game-over {
+  background: #1b1b1b;
+  background: -moz-linear-gradient(
+    top,
+    #1b1b1b 0%,
+    #383838 8%,
+    #3a3a3a 20%,
+    #0a0a0a 47%,
+    #010101 50%,
+    #0d0d0d 54%,
+    #444444 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #1b1b1b),
+    color-stop(8%, #383838),
+    color-stop(20%, #3a3a3a),
+    color-stop(47%, #0a0a0a),
+    color-stop(50%, #010101),
+    color-stop(54%, #0d0d0d),
+    color-stop(100%, #444444)
+  );
+  background: -webkit-linear-gradient(
+    top,
+    #1b1b1b 0%,
+    #383838 8%,
+    #3a3a3a 20%,
+    #0a0a0a 47%,
+    #010101 50%,
+    #0d0d0d 54%,
+    #444444 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    #1b1b1b 0%,
+    #383838 8%,
+    #3a3a3a 20%,
+    #0a0a0a 47%,
+    #010101 50%,
+    #0d0d0d 54%,
+    #444444 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    #1b1b1b 0%,
+    #383838 8%,
+    #3a3a3a 20%,
+    #0a0a0a 47%,
+    #010101 50%,
+    #0d0d0d 54%,
+    #444444 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    #1b1b1b 0%,
+    #383838 8%,
+    #3a3a3a 20%,
+    #0a0a0a 47%,
+    #010101 50%,
+    #0d0d0d 54%,
+    #444444 100%
+  );
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -moz-box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.3),
+    0 1px 1px rgba(255, 255, 255, 0.5), 0 -1px 1px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 15px #000;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid #ed5d1e;
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 50vh;
+  left: 1%;
+  position: absolute;
+  top: 10px;
+  width: 98%;
+  z-index: 3;
+}
+
+#slot-game-over > span {
+  font-size: 15vh;
+  color: white;
+}
+
 #slot-wheels {
   height: 50vh;
   left: 15px;
@@ -152,7 +248,9 @@
 }
 
 .fruits {
-  font-size: 16rem;
+  font-size: 200px;
+  font-size: 13vw;
+  height: 50vh;
 }
 
 #slot-wheels .wheel .overlay {
@@ -301,7 +399,7 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border: 2px solid #ed5d1e;
-  height: 28px;
+  height: 40px;
   bottom: 20px;
   left: 50%;
   letter-spacing: 3px;
@@ -318,7 +416,8 @@
 #slot-display div {
   position: absolute;
   right: 4px;
-  top: 1px;
+  top: 6px;
+  font-size: 25px;
 }
 
 #slot-credits {
@@ -387,7 +486,7 @@
 
 #slot-overlay-line {
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  height: 46%;
+  height: 95%;
   left: 0;
   position: absolute;
   top: 0;
@@ -475,7 +574,7 @@
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.8);
   height: 100%;
   left: 0;
-  width: 22px;
+  width: 30px;
   z-index: 2;
 }
 
@@ -550,7 +649,7 @@
   opacity: 0;
   position: absolute;
   top: 0;
-  width: 10px;
+  width: 30px;
   z-index: 1;
 }
 
@@ -619,10 +718,10 @@
   -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.8);
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.8);
   height: 80%;
-  left: 22px;
+  left: 30px;
   overflow: hidden;
   top: 10%;
-  width: 22px;
+  width: 30px;
   z-index: 1;
 }
 
@@ -691,13 +790,13 @@
   );
   -moz-border-radius: 0 2px 2px 0;
   -webkit-border-radius: 0 2px 2px 0;
-  border-radius: 0 2px 2px 0;
+  border-radius: 0 10px 10px 0;
   height: 50%;
   left: 0;
   opacity: 0;
   position: absolute;
   top: 0;
-  width: 10px;
+  width: 30px;
   z-index: 1;
 }
 
@@ -752,9 +851,9 @@
   border-radius: 0 0 4px 4px;
   box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.8);
   height: 50%;
-  left: 30px;
+  left: 39px;
   top: -25px;
-  width: 6px;
+  width: 12px;
   z-index: 3;
   overflow: visible !important;
 }
@@ -764,8 +863,8 @@
   background: -moz-radial-gradient(
     center,
     ellipse cover,
-    #ff6363 0%,
-    #cf0404 100%
+    #fda979 0%,
+    #ff0000 100%
   );
   background: -webkit-gradient(
     radial,
@@ -773,36 +872,36 @@
     0px,
     center center,
     100%,
-    color-stop(0%, #ff6363),
-    color-stop(100%, #cf0404)
+    color-stop(0%, #fda979),
+    color-stop(100%, #ff0000)
   );
   background: -webkit-radial-gradient(
     center,
     ellipse cover,
-    #ff6363 0%,
-    #cf0404 100%
+    #fda979 0%,
+    #ff0000 100%
   );
   background: -o-radial-gradient(
     center,
     ellipse cover,
-    #ff6363 0%,
-    #cf0404 100%
+    #fda979 0%,
+    #ff0000 100%
   );
   background: -ms-radial-gradient(
     center,
     ellipse cover,
-    #ff6363 0%,
-    #cf0404 100%
+    #fda979 0%,
+    #ff0000 100%
   );
-  background: radial-gradient(ellipse at center, #ff6363 0%, #cf0404 100%);
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-  height: 16px;
-  left: -7px;
+  background: radial-gradient(ellipse at center, #fda979 0%, #ff0000 100%);
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 20px;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 40%);
+  height: 41px;
+  left: -15px;
   top: -15px;
-  width: 20px;
+  width: 41px;
   z-index: 4;
 }
 
@@ -811,12 +910,11 @@
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
-  bottom: 66px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-  height: 6px;
-  left: 9px;
-  top: auto;
-  width: 8px;
+  height: 9px;
+  left: 38px;
+  top: 190px;
+  width: 14px;
   z-index: 2;
 }
 
@@ -921,8 +1019,38 @@
   width: 100%;
 }
 
+table {
+  width: auto !important;
+  border-color: black !important;
+}
+
+#legend {
+  display: flex;
+  justify-content: center;
+  margin-top: 12vh;
+}
+
+.reward {
+  display: inline-flex;
+}
+
+.reward > span {
+  max-width: 30px;
+  width: 44px;
+  font-size: 20px;
+  min-width: 34px;
+  font-weight: bolder;
+  text-shadow: 1px 1px 2px black;
+}
+
+.reward > span:nth-child(4) {
+  margin-top: 4px;
+  font-size: 15px;
+  color: white;
+}
+
 .rolling {
-  animation: slide 0.8s infinite linear;
+  animation: slide 0.3s infinite linear;
 }
 
 .rell_1 {

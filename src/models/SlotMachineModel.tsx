@@ -1,4 +1,7 @@
+import internal from "stream";
+
 export type SlotMachineModel = {
+  credits: number;
   rells: RellModel[];
 };
 
