@@ -15,7 +15,7 @@ export function GamesPage() {
   useEffect(() => {
     axios({
       method: "get",
-      url: "http://localhost:2002/isAuthorized",
+      url: process.env.REACT_APP_URL_BASE + "isAuthorized",
       headers: {
         Authorization: localStorage.getItem("user"),
       },
