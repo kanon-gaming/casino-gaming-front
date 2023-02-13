@@ -7,7 +7,7 @@ import { ResultRollModel } from "../models/ResultApiModel";
 
 export class SlotMachineStore {
   slotMachineModel: SlotMachineModel = {
-    credits: 1,
+    credits: 20,
     rells: [
       {
         id: uuid.v4().toString(),
@@ -33,7 +33,7 @@ export class SlotMachineStore {
   doRoll = async () => {
     return await axios({
       method: "post",
-      url: "http://localhost:2002/roll",
+      url: process.env.REACT_APP_URL_BASE + "roll",
       headers: {
         Authorization: localStorage.getItem("user"),
       },

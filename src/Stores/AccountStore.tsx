@@ -35,7 +35,7 @@ export class AccountStore {
   async doRegister() {
     return await axios({
       method: "post",
-      url: "http://localhost:2002/register",
+      url: process.env.REACT_APP_URL_BASE + "register",
       data: {
         email: this.registerModel.email,
         name: this.registerModel.name,
@@ -46,9 +46,10 @@ export class AccountStore {
   }
 
   async doLogin() {
+    const url = process.env.REACT_APP_URL_BASE + "login";
     return await axios({
       method: "post",
-      url: "http://localhost:2002/login",
+      url: url,
       data: {
         email: this.loginModel.email,
         password: this.loginModel.password,
@@ -61,7 +62,7 @@ export class AccountStore {
       accountStore.loginModel.emailMessage = "Please provide a email.";
     } else if (
       accountStore.loginModel.email &&
-      !/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(
         accountStore.loginModel.email
       )
     ) {
@@ -103,7 +104,7 @@ export class AccountStore {
       accountStore.registerModel.emailMessage = "Please provide a email.";
     } else if (
       accountStore.registerModel.email &&
-      !/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(
         accountStore.registerModel.email
       )
     ) {
