@@ -37,15 +37,18 @@ This is a Front End React project
 
 ## Usage
 
-```python
-import foobar
+1. Register on the website
 
-# returns 'words'
-foobar.pluralize('word')
+<img src="https://github.com/kanon-gaming/casino-gaming-front/blob/main/usage/Register.png?raw=true" alt="" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="500" />
 
-# returns 'geese'
-foobar.pluralize('goose')
+2. Login on the website
 
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
+<img src="https://github.com/kanon-gaming/casino-gaming-front/blob/main/usage/Login.png?raw=true" alt="" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="500" />
+
+3. Use the `Ultra Hold & Spin` to access the game.
+
+<img src="https://github.com/kanon-gaming/casino-gaming-front/blob/main/usage/Games-Slot.png?raw=true" alt="" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="500" />
+
+4. Play as much as you want
+
+<img src="https://github.com/kanon-gaming/casino-gaming-front/blob/main/usage/Slot-Machine.png?raw=true" alt="" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="500" />
