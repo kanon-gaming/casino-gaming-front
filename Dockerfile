@@ -10,7 +10,7 @@ RUN apt-get update && \
 
 RUN npm install
 
-ENV REACT_APP_URL_BASE='https://kanongamingapi.marioaugusto.com.br/'
+ENV REACT_APP_URL_BASE='http://localhost:2002/'
 
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
